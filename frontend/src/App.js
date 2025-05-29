@@ -254,8 +254,17 @@ function App() {
       localStorage.setItem('user', JSON.stringify(response.user));
       setUser(response.user);
       
-      // Load initial data after setting user
-      await loadInitialData();
+      // Load initial data based on user role
+      try {
+        const promises = [loadDebts(), loadAnnouncements()];
+        if (response.user.role === 'admin') {
+          promises.push(loadApartments());
+        }
+        await Promise.all(promises);
+      } catch (dataError) {
+        console.error('Error loading initial data:', dataError);
+      }
+      
       showMessage(t.success);
     } catch (error) {
       showMessage(t.loginFailed, true);
