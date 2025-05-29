@@ -283,13 +283,11 @@ function App() {
   };
 
   const loadApartments = async () => {
-    if (user?.role === 'admin') {
-      try {
-        const data = await apiCall('/apartments');
-        setApartments(data);
-      } catch (error) {
-        console.error('Error loading apartments:', error);
-      }
+    try {
+      const data = await apiCall('/apartments');
+      setApartments(data);
+    } catch (error) {
+      console.error('Error loading apartments:', error);
     }
   };
 
