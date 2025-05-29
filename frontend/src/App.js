@@ -333,6 +333,7 @@ function App() {
         debt_type: 'monthly_fee'
       });
       loadDebts();
+      setCurrentView('debts'); // Navigate to debts view to see the new debt
       showMessage(t.debtCreated);
     } catch (error) {
       showMessage(t.error, true);
