@@ -372,6 +372,7 @@ function App() {
       await apiCall('/announcements', 'POST', announcementForm);
       setAnnouncementForm({ title: '', content: '', is_urgent: false });
       loadAnnouncements();
+      setCurrentView('announcements'); // Navigate to announcements view to see the new announcement
       showMessage(t.announcementCreated);
     } catch (error) {
       showMessage(t.error, true);
