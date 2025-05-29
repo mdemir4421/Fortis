@@ -671,6 +671,19 @@ function App() {
           <div className="max-w-2xl">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">{t.createDebt}</h2>
             
+            {/* Load apartments if not loaded */}
+            {apartments.length === 0 && (
+              <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-blue-700">Loading apartments...</p>
+                <button
+                  onClick={loadApartments}
+                  className="mt-2 text-blue-600 hover:text-blue-800 underline"
+                >
+                  Click here if apartments don't load automatically
+                </button>
+              </div>
+            )}
+            
             <div className="bg-white p-6 rounded-lg shadow">
               <form onSubmit={createDebt} className="space-y-4">
                 <div>
@@ -690,6 +703,11 @@ function App() {
                       </option>
                     ))}
                   </select>
+                  {apartments.length === 0 && (
+                    <p className="text-sm text-gray-500 mt-1">
+                      No apartments loaded. Please click the button above to load apartments.
+                    </p>
+                  )}
                 </div>
 
                 <div>
