@@ -209,6 +209,13 @@ function App() {
     }
   }, []);
 
+  // Load apartments when accessing create-debt view
+  useEffect(() => {
+    if (currentView === 'create-debt' && user?.role === 'admin' && apartments.length === 0) {
+      loadApartments();
+    }
+  }, [currentView, user?.role]);
+
   const saveLanguageToCookie = (lang) => {
     document.cookie = `language=${lang}; path=/; max-age=31536000`; // 1 year
     setLanguage(lang);
