@@ -272,11 +272,11 @@ function App() {
 
   const loadInitialData = async () => {
     try {
-      await Promise.all([
-        loadApartments(),
-        loadDebts(),
-        loadAnnouncements()
-      ]);
+      const promises = [loadDebts(), loadAnnouncements()];
+      if (user?.role === 'admin') {
+        promises.push(loadApartments());
+      }
+      await Promise.all(promises);
     } catch (error) {
       console.error('Error loading initial data:', error);
     }
