@@ -254,7 +254,8 @@ function App() {
       localStorage.setItem('user', JSON.stringify(response.user));
       setUser(response.user);
       
-      loadInitialData();
+      // Load initial data after setting user
+      await loadInitialData();
       showMessage(t.success);
     } catch (error) {
       showMessage(t.loginFailed, true);
